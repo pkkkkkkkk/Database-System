@@ -1,7 +1,9 @@
 足球赛事管理系统 (Soccer Management System)
+
 一个基于 Python  和 MySQL 的简易足球信息管理系统
 
-核心功能
+核心功能：
+
 首页概览: 查看所有球队和赛事信息。
 
 
