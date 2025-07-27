@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>欢迎来到足球赛事管理系统</h1>
+    <p>请从上方导航栏选择一个具体操作，或查看下方概览信息。</p>
+    
+    <hr>
+
+    <h2>所有球队信息</h2>
+    {% if teams_list %}
+        <table>
+            <thead>
+                <tr>
+                    <th>球队ID</th>
+                    <th>球队名称</th>
+                    <th>主教练</th>
+                    <th>所属城市</th>
+                    <th>主场名称</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for team in teams_list %}
+                <tr>
+                    <td>{{ team.球队id }}</td>
+                    <td>{{ team.球队名称 }}</td>
+                    <td>{{ team.主教练 if team.主教练 else 'N/A' }}</td>
+                    <td>{{ team.所属城市 if team.所属城市 else 'N/A' }}</td>
+                    <td>{{ team.主场名称 if team.主场名称 else 'N/A' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>目前没有球队信息可显示。</p>
+    {% endif %}
+
+    <hr style="margin-top: 30px;">
+
+    <h2>所有赛事信息</h2>
+    {% if tournaments_list %}
+        <table>
+            <thead>
+                <tr>
+                    <th>赛事名称</th>
+                    <th>当前赛季</th>
+                    <th>冠军球队ID</th>
+                    <th>冠军球队名称</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tournament in tournaments_list %}
+                <tr>
+                    <td>{{ tournament.赛事名称 }}</td>
+                    <td>{{ tournament.当前赛季 }}</td>
+                    <td>{{ tournament.赛事冠军_球队id if tournament.赛事冠军_球队id is not none else '未决出' }}</td>
+                    <td>{{ tournament.冠军球队名称 if tournament.冠军球队名称 else ('未决出' if tournament.赛事冠军_球队id is none else '未知球队 (ID: ' + tournament.赛事冠军_球队id|string + ')') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>目前没有赛事信息可显示。</p>
+    {% endif %}
+
+    <hr style="margin-top: 30px;">
+    
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2>添加新球员</h2>
+    <form method="POST" action="{{ url_for('add_player_page') }}">
+        <p>
+            <label for="player_id">球员ID (唯一整数):</label><br>
+            <input type="number" id="player_id" name="player_id" required>
+        </p>
+        <p>
+            <label for="name">球员姓名:</label><br>
+            <input type="text" id="name" name="name" required>
+        </p>
+        <p>
+            <label for="position">位置:</label><br>
+            <select id="position" name="position" required>
+                <option value="" disabled selected>--请选择位置--</option>
+                <option value="前锋">前锋</option>
+                <option value="中场">中场</option>
+                <option value="后卫">后卫</option>
+                <option value="门将">门将</option>
+            </select>
+        </p>
+        <p>
+            <label for="nationality">球员国籍:</label><br>
+            <input type="text" id="nationality" name="nationality">
+        </p>
+        <p>
+            <label for="birth_date">出生日期 (YYYY-MM-DD):</label><br>
+            <input type="date" id="birth_date" name="birth_date" required>
+        </p>
+        <p>
+            <label for="height_weight">身高体重 (例如: 180cm/75kg):</label><br>
+            <input type="text" id="height_weight" name="height_weight">
+        </p>
+        <p>
+            <label for="team_id">效力球队ID (整数):</label><br>
+            <input type="number" id="team_id" name="team_id" required>
+        </p>
+        <fieldset>
+            <legend>位置特定数据 </legend>
+            <p>
+                <label for="goals">进球数 (前锋适用):</label><br>
+                <input type="number" id="goals" name="goals" value="0">
+            </p>
+            <p>
+                <label for="assists">助攻数 (前锋适用):</label><br>
+                <input type="number" id="assists" name="assists" value="0">
+            </p>
+            <p>
+                <label for="key_passes">关键传球数 (中场适用):</label><br>
+                <input type="number" id="key_passes" name="key_passes" value="0">
+            </p>
+            <p>
+                <label for="successful_defenses">抢断数 (后卫适用):</label><br>
+                <input type="number" id="successful_defenses" name="successful_defenses" value="0">
+            </p>
+             <p>
+                <label for="key_saves">关键扑救数 (门将适用):</label><br>
+                <input type="number" id="key_saves" name="key_saves" value="0">
+            </p>
+        </fieldset>
+        <p><input type="submit" value="添加球员"></p>
+    </form>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>查看俱乐部球员</h2>
+    <p>输入俱乐部名称以查看该俱乐部所有球员的详细信息。</p>
+    <form method="POST" action="{{ url_for('view_club_players_by_name_page') }}">
+        <p>
+            <label for="club_name">请输入俱乐部名称:</label><br>
+            <input type="text" id="club_name" name="club_name" value="{{ club_name_searched if club_name_searched is not none else '' }}" required>
+        </p>
+        <p><input type="submit" value="查询球员"></p>
+    </form>
+
+    {% if players is defined and players %}  {# 确保 players 变量存在且不为空 #}
+        <h3>查询结果: "{{ club_name_searched }}" 的球员列表</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>球员ID</th>
+                    <th>球员姓名</th>
+                    <th>球员位置</th>
+                    <th>球员国籍</th>
+                    <th>出生日期</th>
+                    <th>身高体重</th>
+                    <th>效力球队名称</th>
+                    <th>进球数</th>
+                    <th>助攻数</th>
+                    <th>关键传球数</th>
+                    <th>抢断数</th>    {# 根据您更新的视图 #}
+                    <th>关键扑救数</th>  {# 根据您更新的视图 #}
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in players %}
+                <tr>
+                    <td>{{ player.球员ID }}</td>
+                    <td>{{ player.球员姓名 }}</td>
+                    <td>{{ player.球员位置 }}</td>
+                    <td>{{ player.球员国籍 if player.球员国籍 is not none else 'N/A' }}</td>
+                    <td>{{ player.出生日期 if player.出生日期 else 'N/A' }}</td>
+                    <td>{{ player.身高体重 if player.身高体重 else 'N/A' }}</td>
+                    <td>{{ player.效力球队名称 }}</td>
+                    <td>{{ player.进球数 if player.进球数 is not none else 'N/A' }}</td>
+                    <td>{{ player.助攻数 if player.助攻数 is not none else 'N/A' }}</td>
+                    <td>{{ player.关键传球数 if player.关键传球数 is not none else 'N/A' }}</td>
+                    <td>{{ player.抢断数 if player.抢断数 is not none else 'N/A' }}</td>
+                    <td>{{ player.关键扑救数 if player.关键扑救数 is not none else 'N/A' }}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% elif request.method == 'POST' and club_name_searched %}
+        <p>未找到俱乐部 "{{ club_name_searched }}" 的球员信息，或该俱乐部无球员。</p>
+    {% endif %}
+{% endblock %}

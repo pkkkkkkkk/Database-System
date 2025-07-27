@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>球员转会</h2>
+    <p>此操作将调用数据库存储过程来更新球员的效力球队。</p>
+    <form method="POST" action="{{ url_for('transfer_player_page') }}">
+        <p>
+            <label for="player_id">要转会的球员ID:</label><br>
+            <input type="number" id="player_id" name="player_id" required>
+        </p>
+        <p>
+            <label for="new_team_id">转会至新球队ID:</label><br>
+            <input type="number" id="new_team_id" name="new_team_id" required>
+        </p>
+        <p><input type="submit" value="执行转会"></p>
+    </form>
+{% endblock %}
